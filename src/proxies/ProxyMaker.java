@@ -20,10 +20,6 @@ public class ProxyMaker<T> {
 		this.classToProxy = classToProxy;
 	}
 
-	public static void main(String[] args) {
-
-	}
-
 	@SuppressWarnings("unchecked")
 	public T proxyAllMethods(MethodHandler methodHandler) {
 		try {
