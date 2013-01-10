@@ -1,0 +1,17 @@
+<project name="cdc-livros" default="resolve" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
+
+	<property file="build.properties" />
+
+	<target name="resolve" description="--> retrieve dependencies with ivy">
+		<path id="ivy.lib.path">
+			<pathelement location="${ivy.jar.file}" />
+		</path>
+
+		<taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant" classpathref="ivy.lib.path" />
+
+		<delete dir="${libs.dir}" includes="**/*.*" />
+		<ivy:settings file="${ivy.settings.file}" />
+		<ivy:retrieve pattern="${libs.dir}/[artifact](-[classifier]).[ext]" sync="true" />
+	</target>
+
+</project>

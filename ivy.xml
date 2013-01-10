@@ -1,0 +1,12 @@
+<ivy-module version="2.0">
+	<info organisation="chicosokol.com.br" module="proxies" />
+
+	<configurations>
+		<conf name="default" description="dependencies used for compile" />
+		<conf name="test" description="dependencies used for tests" visibility="public" />
+	</configurations>
+
+	<dependencies>
+        <dependency org="javassist" name="javassist" rev="3.12.1.GA"/>
+	</dependencies>
+</ivy-module>
