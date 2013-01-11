@@ -8,5 +8,6 @@
 
 	<dependencies>
         <dependency org="javassist" name="javassist" rev="3.12.1.GA"/>
+        <dependency org="org.jruby" name="jruby" rev="1.7.2"/>
 	</dependencies>
 </ivy-module>
