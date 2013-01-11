@@ -1,4 +1,4 @@
-class Classe
+class NoMethodToDelegate
 	def hello
 		puts "hello"
 	end
