@@ -1,4 +1,4 @@
-package proxies;
+package rubydelegator;
 
 import java.lang.reflect.Method;
 

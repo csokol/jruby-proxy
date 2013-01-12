@@ -1,4 +1,4 @@
-package jruby;
+package rubydelegator;
 
 import java.io.InputStream;
 import java.util.Scanner;
@@ -15,15 +15,15 @@ public class Testes {
 		
 		String file = readFile();
         IRubyObject res = runtime.evalScriptlet(file);
-        res = runtime.evalScriptlet("Classe.new");
+        res = runtime.evalScriptlet("RubyClass.new");
         System.out.println(res.isClass());
         System.out.println(res);
-		res.callMethod(runtime.getCurrentContext(), "hello");
+		res.callMethod(runtime.getCurrentContext(), "method");
 		System.out.println(end - start);
 	}
 
 	private static String readFile() {
-		InputStream stream = Testes.class.getResourceAsStream("/classe.rb");
+		InputStream stream = Testes.class.getResourceAsStream("/ruby_class.rb");
 		Scanner scanner = new Scanner(stream);
 		scanner.useDelimiter("$$");
 		String script = scanner.next();

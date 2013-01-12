@@ -1,4 +1,4 @@
-package jruby;
+package rubydelegator.jruby;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

@@ -1,4 +1,4 @@
-package proxies;
+package rubydelegator.proxy;
 
 import static junit.framework.Assert.*;
 
@@ -7,6 +7,8 @@ import java.lang.reflect.Method;
 import javassist.util.proxy.MethodHandler;
 
 import org.junit.Test;
+
+import rubydelegator.ProxyMaker;
 
 
 public class ProxyMakerTest {

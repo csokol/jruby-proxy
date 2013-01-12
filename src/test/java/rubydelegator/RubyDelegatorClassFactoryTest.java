@@ -1,16 +1,29 @@
-package jruby;
+package rubydelegator;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
-import java.io.InputStream;
+import java.util.List;
 
+import org.jruby.Ruby;
+import org.junit.Before;
 import org.junit.Test;
+
+import rubydelegator.jruby.RubyDelegatorFactory;
+import rubydelegator.jruby.RubyMethod;
 
 public class RubyDelegatorClassFactoryTest {
 	
+	private Ruby runtime;
+
+	@Before
+	public void setUp() {
+		runtime = Ruby.newInstance();
+	}
+	
 	@Test
 	public void shouldBuildClassWithNoMethodToDelagate() throws Exception {
-		RubyDelegatorClass<NoMethodToDelegate> rubyDelegatorClass = new RubyDelegatorClass<NoMethodToDelegate>(NoMethodToDelegate.class);
+		RubyDelegatorFactory<NoMethodToDelegate> rubyDelegatorClass = new RubyDelegatorFactory<NoMethodToDelegate>(NoMethodToDelegate.class, runtime);
 		NoMethodToDelegate object = rubyDelegatorClass.build();
 		assertEquals(42, object.method());
 	}
@@ -24,13 +37,16 @@ public class RubyDelegatorClassFactoryTest {
 	
 	@Test
 	public void shouldBuildClassAndUseRubyImpl() throws Exception {
-		RubyDelegatorClass<RubyClazz> rubyDelegatorClass = new RubyDelegatorClass<RubyClazz>(RubyClazz.class);
+		RubyDelegatorFactory<RubyClazz> rubyDelegatorClass = new RubyDelegatorFactory<RubyClazz>(RubyClazz.class, runtime);
 		RubyClazz object = rubyDelegatorClass.build();
 		assertEquals(42, object.method());
 		assertEquals("42", object.string());
+		assertNotNull(object.list());
+		
+		assertEquals(100, object.normalMethod());
 	}
 	
-	@RubyClass("ruby_class.rb") //contains RubyClass#method which returns 42 and RubyClass#string which returns "42"  
+	@RubyClass("ruby_clazz.rb") //contains RubyClazz#method which returns 42 and RubyClazz#string which returns "42"  
 	public static class RubyClazz {
 		@RubyMethod
 		public int method() {
@@ -40,11 +56,20 @@ public class RubyDelegatorClassFactoryTest {
 		public String string() {
 			return "0";
 		}
+		
+		@RubyMethod
+		public List<Integer> list() {
+			return null;
+		}
+		
+		public int normalMethod() {
+			return 100;
+		}
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void shouldThrowExceptionWhenClassIsNotAnnotated() {
-		new RubyDelegatorClass<NotAnnotated>(NotAnnotated.class);
+		new RubyDelegatorFactory<NotAnnotated>(NotAnnotated.class, runtime);
 	}
 	
 	public static class NotAnnotated {
@@ -56,7 +81,7 @@ public class RubyDelegatorClassFactoryTest {
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void shouldThrowExceptionWhenClassIsAnnotatedWithUnexistentScript() {
-		new RubyDelegatorClass<UnexistentScript>(UnexistentScript.class);
+		new RubyDelegatorFactory<UnexistentScript>(UnexistentScript.class, runtime);
 	}
 	
 	@RubyClass("unexistent.rb")
@@ -66,5 +91,5 @@ public class RubyDelegatorClassFactoryTest {
 			return 0;
 		}
 	}
-
+	
 }

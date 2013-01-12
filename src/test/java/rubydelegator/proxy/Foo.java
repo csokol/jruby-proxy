@@ -1,4 +1,4 @@
-package proxies;
+package rubydelegator.proxy;
 
 public class Foo {
 	int x;
