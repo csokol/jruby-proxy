@@ -1,13 +1,13 @@
 package rubydelegator.jruby.converter;
 
-public abstract class AbstractObjectToScriptlet implements ObjectToScriptlet {
+public abstract class AbstractJavaObjectToScriptConverter implements JavaObjectToScriptConverter {
 	
 	@Override
 	public String convert(Object javaObject) {
 		if (canConvert(javaObject)) {
 			return toScriptlet(javaObject);
 		}
-		ObjectToScriptlet delegate = getDelegate();
+		JavaObjectToScriptConverter delegate = getDelegate();
 		return delegate.convert(javaObject);
 	}
 

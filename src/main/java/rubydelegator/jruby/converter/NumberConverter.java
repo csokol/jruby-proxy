@@ -1,11 +1,11 @@
 package rubydelegator.jruby.converter;
 
 
-public class NumberConverter extends AbstractObjectToScriptlet {
+public class NumberConverter extends AbstractJavaObjectToScriptConverter {
 
-	private final ObjectToScriptlet next;
+	private final JavaObjectToScriptConverter next;
 
-	public NumberConverter(ObjectToScriptlet next) {
+	public NumberConverter(JavaObjectToScriptConverter next) {
 		this.next = next;
 	}
 	
@@ -20,7 +20,7 @@ public class NumberConverter extends AbstractObjectToScriptlet {
 	}
 	
 	@Override
-	public ObjectToScriptlet getDelegate() {
+	public JavaObjectToScriptConverter getDelegate() {
 		return next;
 	}
 

@@ -1,10 +1,10 @@
 package rubydelegator.jruby.converter;
 
-public class StringConverter extends AbstractObjectToScriptlet implements ObjectToScriptlet {
+public class StringConverter extends AbstractJavaObjectToScriptConverter implements JavaObjectToScriptConverter {
 
-	private final ObjectToScriptlet next;
+	private final JavaObjectToScriptConverter next;
 
-	public StringConverter(ObjectToScriptlet next) {
+	public StringConverter(JavaObjectToScriptConverter next) {
 		this.next = next;
 	}
 
@@ -19,9 +19,8 @@ public class StringConverter extends AbstractObjectToScriptlet implements Object
 	}
 	
 	@Override
-	public ObjectToScriptlet getDelegate() {
+	public JavaObjectToScriptConverter getDelegate() {
 		return next;
 	}
-
 
 }

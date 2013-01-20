@@ -1,7 +1,7 @@
 package rubydelegator.jruby.converter;
 
 
-public interface ObjectToScriptlet {
+public interface JavaObjectToScriptConverter {
 
 	String toScriptlet(Object javaObject);
 
@@ -9,6 +9,6 @@ public interface ObjectToScriptlet {
 
 	String convert(Object javaObject);
 
-	ObjectToScriptlet getDelegate();
+	JavaObjectToScriptConverter getDelegate();
 
 }
