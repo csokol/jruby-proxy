@@ -1,4 +1,4 @@
-package rubydelegator;
+package rubydelegator.jruby;
 
 import java.io.InputStream;
 import java.util.Scanner;

@@ -20,7 +20,7 @@ public class RubyDelegatorFactory<T> {
 	private final Ruby runtime;
 	private MethodHandler handlerGiven;
 
-	public RubyDelegatorFactory(Class<T> clazz, Ruby runtime, RubyMethodHandler<T> methodHandler) {
+	public RubyDelegatorFactory(Class<T> clazz, Ruby runtime, ScriptMethodHandler methodHandler) {
 		this.clazz = clazz;
 		this.runtime = runtime;
 		handlerGiven = methodHandler;

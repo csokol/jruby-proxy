@@ -1,4 +1,4 @@
-package rubydelegator;
+package rubydelegator.jruby;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;

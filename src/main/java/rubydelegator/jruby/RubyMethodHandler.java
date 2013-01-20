@@ -2,12 +2,10 @@ package rubydelegator.jruby;
 
 import java.lang.reflect.Method;
 
-import javassist.util.proxy.MethodHandler;
-
 import org.jruby.Ruby;
 import org.jruby.runtime.builtin.IRubyObject;
 
-public class RubyMethodHandler<T> implements MethodHandler {
+public class RubyMethodHandler<T> implements ScriptMethodHandler {
 
 	private final Ruby runtime;
 	private IRubyObject rubyClass;
@@ -22,6 +20,7 @@ public class RubyMethodHandler<T> implements MethodHandler {
 		this.converter = converter;
 	}
 	
+	@Override
 	public void init() {
 		rubyClass = runtime.evalScriptlet(javaClass.getSimpleName());
 		rubyInstance = rubyClass.callMethod(runtime.getCurrentContext(), "new");
