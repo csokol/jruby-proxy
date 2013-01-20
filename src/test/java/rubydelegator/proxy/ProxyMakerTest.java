@@ -3,6 +3,9 @@ package rubydelegator.proxy;
 import static junit.framework.Assert.*;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import javassist.util.proxy.MethodHandler;
 
@@ -31,7 +34,9 @@ public class ProxyMakerTest {
 			}
 		};
 		
-		Foo f = new ProxyMaker<Foo>(Foo.class).proxyAllMethods(methodHandler);
+		Set<Method> methods = new HashSet<>();
+		methods.add(Foo.class.getDeclaredMethods()[0]);
+		Foo f = new ProxyMaker<Foo>(Foo.class).proxy(methodHandler, methods);
 		f.setX(100);
 		
 		assertEquals(42, f.x);
