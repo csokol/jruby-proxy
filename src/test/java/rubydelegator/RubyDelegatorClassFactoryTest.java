@@ -2,14 +2,14 @@ package rubydelegator;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-import java.lang.reflect.Method;
 import java.util.List;
 
 import org.jruby.Ruby;
 import org.junit.Before;
 import org.junit.Test;
-import static org.mockito.Mockito.*;
 
 import rubydelegator.annotation.RubyClass;
 import rubydelegator.annotation.RubyMethod;
@@ -29,8 +29,8 @@ public class RubyDelegatorClassFactoryTest {
 	@Test
 	public void shouldBuildClassWithNoMethodToDelagate() throws Exception {
 		RubyDelegatorFactory<NoMethodToDelegate> rubyDelegatorClass = buildFactory(NoMethodToDelegate.class);
-		//NoMethodToDelegate object = rubyDelegatorClass.build();
-		//assertEquals(42, object.method());
+		NoMethodToDelegate object = rubyDelegatorClass.build();
+		assertEquals(42, object.method());
 	}
 	
 	@RubyClass("no_method_to_delegate.rb")
