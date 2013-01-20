@@ -33,8 +33,19 @@ public class ProxyMakerTest {
 		
 		Foo f = new ProxyMaker<Foo>(Foo.class).proxyAllMethods(methodHandler);
 		f.setX(100);
-		System.out.println(f);
 		
 		assertEquals(42, f.x);
+	}
+	
+	public static class Foo {
+		int x;
+		
+		public Foo() {
+			
+		}
+		
+		public void setX (int x) {
+			this.x = x;
+		}
 	}
 }

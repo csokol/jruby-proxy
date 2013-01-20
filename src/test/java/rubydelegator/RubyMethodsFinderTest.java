@@ -10,7 +10,7 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import rubydelegator.jruby.RubyMethod;
+import rubydelegator.annotation.RubyMethod;
 import rubydelegator.jruby.RubyMethodsFinder;
 
 public class RubyMethodsFinderTest {

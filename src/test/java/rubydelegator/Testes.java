@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.util.Scanner;
 
 import org.jruby.Ruby;
+import org.jruby.RubyBasicObject;
 import org.jruby.runtime.builtin.IRubyObject;
 
 public class Testes {
@@ -15,15 +16,17 @@ public class Testes {
 		
 		String file = readFile();
         IRubyObject res = runtime.evalScriptlet(file);
-        res = runtime.evalScriptlet("RubyClass.new");
-        System.out.println(res.isClass());
-        System.out.println(res);
-		res.callMethod(runtime.getCurrentContext(), "method");
+        res = runtime.evalScriptlet("RubyClazz.new");
+        IRubyObject[] rubyargs = new IRubyObject[1];
+        rubyargs[0] = runtime.evalScriptlet("100");
+		IRubyObject out = res.callMethod(runtime.getCurrentContext(), "with_arg", rubyargs);
+		System.out.println(out);
+		System.out.println(out.getJavaClass());
 		System.out.println(end - start);
 	}
 
 	private static String readFile() {
-		InputStream stream = Testes.class.getResourceAsStream("/ruby_class.rb");
+		InputStream stream = Testes.class.getResourceAsStream("/ruby_clazz.rb");
 		Scanner scanner = new Scanner(stream);
 		scanner.useDelimiter("$$");
 		String script = scanner.next();

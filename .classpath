@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src/main/java"/>
-	<classpathentry kind="src" path="src/main/ruby"/>
 	<classpathentry kind="src" path="src/test/java"/>
 	<classpathentry kind="src" path="src/test/resources"/>
 	<classpathentry kind="src" path="src/test/ruby"/>
@@ -13,6 +12,8 @@
 	<classpathentry kind="lib" path="lib/bsf.jar"/>
 	<classpathentry kind="lib" path="lib/jruby.jar" sourcepath="lib/jruby-sources.jar"/>
 	<classpathentry kind="lib" path="lib/jruby-sources.jar"/>
+	<classpathentry kind="lib" path="lib/mockito-all.jar"/>
+	<classpathentry kind="lib" path="lib/mockito-all-javadoc.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

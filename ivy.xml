@@ -9,5 +9,6 @@
 	<dependencies>
         <dependency org="javassist" name="javassist" rev="3.12.1.GA"/>
         <dependency org="org.jruby" name="jruby" rev="1.7.2"/>
+        <dependency org="org.mockito" name="mockito-all" rev="1.9.5"/>
 	</dependencies>
 </ivy-module>

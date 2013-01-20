@@ -11,16 +11,18 @@ import javassist.util.proxy.MethodHandler;
 import org.jruby.Ruby;
 
 import rubydelegator.ProxyMaker;
-import rubydelegator.RubyClass;
+import rubydelegator.annotation.RubyClass;
 
 public class RubyDelegatorFactory<T> {
 
 	private final Class<T> clazz;
 	private final Ruby runtime;
+	private final TypeConverter converter;
 
-	public RubyDelegatorFactory(Class<T> clazz, Ruby runtime) {
+	public RubyDelegatorFactory(Class<T> clazz, Ruby runtime, TypeConverter converter) {
 		this.clazz = clazz;
 		this.runtime = runtime;
+		this.converter = converter;
 		getRubyScript(clazz);
 	}
 
@@ -50,7 +52,7 @@ public class RubyDelegatorFactory<T> {
 		ProxyMaker<T> proxyMaker = new ProxyMaker<>(clazz);
 		List<Method> methods = Arrays.asList(clazz.getMethods());
 		
-		MethodHandler handlerGiven = new RubyDelegatorMethodHandler<T>(methods, runtime, clazz);
+		MethodHandler handlerGiven = new RubyMethodHandler<T>(methods, runtime, clazz, converter);
 		
 		T object = proxyMaker.proxyAllMethods(handlerGiven);
 		return object;

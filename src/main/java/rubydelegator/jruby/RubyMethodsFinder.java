@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import rubydelegator.annotation.RubyMethod;
+
 public class RubyMethodsFinder {
 
 	public Set<Method> find(List<Method> allMethods) {

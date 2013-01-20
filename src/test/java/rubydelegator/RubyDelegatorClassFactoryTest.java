@@ -8,9 +8,12 @@ import java.util.List;
 import org.jruby.Ruby;
 import org.junit.Before;
 import org.junit.Test;
+import static org.mockito.Mockito.*;
 
+import rubydelegator.annotation.RubyClass;
+import rubydelegator.annotation.RubyMethod;
 import rubydelegator.jruby.RubyDelegatorFactory;
-import rubydelegator.jruby.RubyMethod;
+import rubydelegator.jruby.TypeConverter;
 
 public class RubyDelegatorClassFactoryTest {
 	
@@ -23,7 +26,7 @@ public class RubyDelegatorClassFactoryTest {
 	
 	@Test
 	public void shouldBuildClassWithNoMethodToDelagate() throws Exception {
-		RubyDelegatorFactory<NoMethodToDelegate> rubyDelegatorClass = new RubyDelegatorFactory<NoMethodToDelegate>(NoMethodToDelegate.class, runtime);
+		RubyDelegatorFactory<NoMethodToDelegate> rubyDelegatorClass = buildFactory(NoMethodToDelegate.class);
 		NoMethodToDelegate object = rubyDelegatorClass.build();
 		assertEquals(42, object.method());
 	}
@@ -37,7 +40,7 @@ public class RubyDelegatorClassFactoryTest {
 	
 	@Test
 	public void shouldBuildClassAndUseRubyImpl() throws Exception {
-		RubyDelegatorFactory<RubyClazz> rubyDelegatorClass = new RubyDelegatorFactory<RubyClazz>(RubyClazz.class, runtime);
+		RubyDelegatorFactory<RubyClazz> rubyDelegatorClass = buildFactory(RubyClazz.class);
 		RubyClazz object = rubyDelegatorClass.build();
 		assertEquals(42, object.method());
 		assertEquals("42", object.string());
@@ -46,7 +49,17 @@ public class RubyDelegatorClassFactoryTest {
 		assertEquals(100, object.normalMethod());
 	}
 	
-	@RubyClass("ruby_clazz.rb") //contains RubyClazz#method which returns 42 and RubyClazz#string which returns "42"  
+	@Test
+	public void shouldCallMethodWithParameters() throws Exception {
+		TypeConverter mockedConverter = mock(TypeConverter.class);
+		when(mockedConverter.convert(new Integer(100))).thenReturn(runtime.evalScriptlet("100"));
+		RubyDelegatorFactory<RubyClazz> rubyDelegatorClass = buildFactory(RubyClazz.class, mockedConverter);
+		RubyClazz object = rubyDelegatorClass.build();
+		assertEquals(100*100, object.withParameter(100));
+	}
+
+	
+	@RubyClass("ruby_clazz.rb") //contains class RubyClazz class  
 	public static class RubyClazz {
 		@RubyMethod
 		public int method() {
@@ -65,11 +78,16 @@ public class RubyDelegatorClassFactoryTest {
 		public int normalMethod() {
 			return 100;
 		}
+		
+		@RubyMethod
+		public int withParameter(int param) {
+			return param;
+		}
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void shouldThrowExceptionWhenClassIsNotAnnotated() {
-		new RubyDelegatorFactory<NotAnnotated>(NotAnnotated.class, runtime);
+		buildFactory(NotAnnotated.class);
 	}
 	
 	public static class NotAnnotated {
@@ -81,7 +99,7 @@ public class RubyDelegatorClassFactoryTest {
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void shouldThrowExceptionWhenClassIsAnnotatedWithUnexistentScript() {
-		new RubyDelegatorFactory<UnexistentScript>(UnexistentScript.class, runtime);
+		buildFactory(UnexistentScript.class);
 	}
 	
 	@RubyClass("unexistent.rb")
@@ -92,4 +110,12 @@ public class RubyDelegatorClassFactoryTest {
 		}
 	}
 	
+	private <T>RubyDelegatorFactory<T> buildFactory(Class<T> clazz) {
+		return buildFactory(clazz, null);
+	}
+	
+	private <T>RubyDelegatorFactory<T> buildFactory(Class<T> clazz, TypeConverter converter) {
+		RubyDelegatorFactory<T> rubyDelegatorClass = new RubyDelegatorFactory<T>(clazz, runtime, converter);
+		return rubyDelegatorClass;
+	}
 }
