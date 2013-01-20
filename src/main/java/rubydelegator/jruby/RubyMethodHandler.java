@@ -5,6 +5,8 @@ import java.lang.reflect.Method;
 import org.jruby.Ruby;
 import org.jruby.runtime.builtin.IRubyObject;
 
+import rubydelegator.TypeConverter;
+
 public class RubyMethodHandler<T> implements ScriptMethodHandler {
 
 	private final Ruby runtime;

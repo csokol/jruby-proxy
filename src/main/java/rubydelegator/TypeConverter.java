@@ -1,4 +1,4 @@
-package rubydelegator.jruby;
+package rubydelegator;
 
 import org.jruby.runtime.builtin.IRubyObject;
 

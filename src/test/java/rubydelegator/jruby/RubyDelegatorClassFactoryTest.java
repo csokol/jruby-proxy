@@ -11,11 +11,11 @@ import org.jruby.Ruby;
 import org.junit.Before;
 import org.junit.Test;
 
+import rubydelegator.TypeConverter;
 import rubydelegator.annotation.RubyClass;
 import rubydelegator.annotation.RubyMethod;
 import rubydelegator.jruby.RubyDelegatorFactory;
 import rubydelegator.jruby.RubyMethodHandler;
-import rubydelegator.jruby.TypeConverter;
 
 public class RubyDelegatorClassFactoryTest {
 	
