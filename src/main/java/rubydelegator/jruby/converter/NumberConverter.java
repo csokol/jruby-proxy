@@ -11,7 +11,7 @@ public class NumberConverter extends AbstractJavaObjectToScriptConverter {
 	
 	@Override
 	public boolean canConvert(Object javaObject) {
-		return Number.class.isAssignableFrom(javaObject.getClass());
+		return javaObject != null && Number.class.isAssignableFrom(javaObject.getClass());
 	}
 	
 	@Override

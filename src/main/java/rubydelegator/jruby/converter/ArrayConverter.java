@@ -24,7 +24,7 @@ public class ArrayConverter extends AbstractJavaObjectToScriptConverter {
 
 	@Override
 	public boolean canConvert(Object javaObject) {
-		return javaObject.getClass().isAssignableFrom(ARR.getClass());
+		return javaObject != null && javaObject.getClass().isAssignableFrom(ARR.getClass());
 	}
 
 	@Override

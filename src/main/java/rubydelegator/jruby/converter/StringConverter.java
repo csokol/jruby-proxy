@@ -10,7 +10,7 @@ public class StringConverter extends AbstractJavaObjectToScriptConverter impleme
 
 	@Override
 	public boolean canConvert(Object javaObject) {
-		return String.class.isAssignableFrom(javaObject.getClass());
+		return javaObject != null && String.class.isAssignableFrom(javaObject.getClass());
 	}
 	
 	@Override

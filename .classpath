@@ -4,6 +4,7 @@
 	<classpathentry kind="src" path="src/test/java"/>
 	<classpathentry kind="src" path="src/test/resources"/>
 	<classpathentry kind="src" path="src/test/ruby"/>
+	<classpathentry kind="src" path="src/test/acceptance"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry kind="lib" path="lib/javassist.jar" sourcepath="lib/javassist-sources.jar"/>
 	<classpathentry kind="lib" path="lib/javassist-javadoc.jar"/>

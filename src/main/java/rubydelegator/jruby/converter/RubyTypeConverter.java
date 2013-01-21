@@ -12,7 +12,8 @@ public class RubyTypeConverter implements TypeConverter {
 
 	public RubyTypeConverter(Ruby runtime) {
 		this.runtime = runtime;
-		converter = new NumberConverter(null);
+		converter = new NullConverter(null);
+		converter = new NumberConverter(converter);
 		converter = new StringConverter(converter);
 		converter = new ArrayConverter(converter);
 	}
